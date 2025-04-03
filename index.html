@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportZone - Your Ultimate Sports Destination</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-basketball fa-bounce me-2"></i>SportZone
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sports.html">Sports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="live-updates.html">Live Updates</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="betting.html">Betting</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="login.html" class="btn btn-outline-light me-2">Login</a>
+                    <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Background Slideshow -->
+    <div class="hero-slideshow">
+        <div class="hero-slide active" style="background-image: url('https://source.unsplash.com/random/1920x1080/?football');">
+            <div class="hero-content">
+                <h1>Welcome to SportZone</h1>
+                <p>Your ultimate destination for sports updates, live scores, and betting tips</p>
+                <a href="signup.html" class="btn btn-primary btn-lg">Join Now</a>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: url('https://source.unsplash.com/random/1920x1080/?basketball');">
+            <div class="hero-content">
+                <h1>Live Updates</h1>
+                <p>Follow your favorite teams and never miss a moment of action</p>
+                <a href="live-updates.html" class="btn btn-primary btn-lg">Check Scores</a>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: url('https://source.unsplash.com/random/1920x1080/?tennis');">
+            <div class="hero-content">
+                <h1>Expert Predictions</h1>
+                <p>Get winning insights from our advanced prediction models</p>
+                <a href="betting.html" class="btn btn-primary btn-lg">View Predictions</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Sports Section -->
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Popular Sports</h2>
+        <div class="row g-4">
+            <!-- Football -->
+            <div class="col-md-4">
+                <div class="card sport-card">
+                    <img src="C:\Users\Administrator\Documents\Sports-website\images\Football 6.jpg" class="card-img-top" alt="Football">
+                    <div class="card-body">
+                        <h3 class="card-title">Football</h3>
+                        <p class="card-text">Follow the latest football matches, transfer news, and player updates.</p>
+                        <a href="sport-details.html?sport=football" class="btn btn-primary">Explore</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Basketball -->
+            <div class="col-md-4">
+                <div class="card sport-card">
+                    <img src="C:\Users\Administrator\Documents\Sports-website\images\Basketball 4.jpg" class="card-img-top" alt="Basketball">
+                    <div class="card-body">
+                        <h3 class="card-title">Basketball</h3>
+                        <p class="card-text">Stay up-to-date with NBA, FIBA and other basketball competitions.</p>
+                        <a href="sport-details.html?sport=basketball" class="btn btn-primary">Explore</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tennis -->
+            <div class="col-md-4">
+                <div class="card sport-card">
+                    <img src="C:\Users\Administrator\Documents\Sports-website\images\Tennis 1.jpg" class="card-img-top" alt="Tennis">
+                    <div class="card-body">
+                        <h3 class="card-title">Tennis</h3>
+                        <p class="card-text">Get the latest updates on Grand Slams and tennis tournaments worldwide.</p>
+                        <a href="sport-details.html?sport=tennis" class="btn btn-primary">Explore</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Matches Section -->
+    <section class="bg-light py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Live Matches</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="live-matches">
+                        <!-- Match 1 -->
+                        <div class="card mb-3 live-match-card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="team">
+                                        <img src="https://via.placeholder.com/40" alt="Team 1">
+                                        <span>Manchester United</span>
+                                    </div>
+                                    <div class="score">
+                                        <span class="badge bg-primary">2</span>
+                                        <span class="badge bg-secondary">:</span>
+                                        <span class="badge bg-primary">1</span>
+                                    </div>
+                                    <div class="team">
+                                        <span>Liverpool</span>
+                                        <img src="https://via.placeholder.com/40" alt="Team 2">
+                                    </div>
+                                </div>
+                                <div class="match-info text-center mt-2">
+                                    <span class="badge bg-danger">LIVE</span>
+                                    <span class="text-muted">75'</span>
+                                    <a href="live-updates.html" class="btn btn-sm btn-outline-primary ms-2">Watch Details</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Match 2 -->
+                        <div class="card mb-3 live-match-card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="team">
+                                        <img src="https://via.placeholder.com/40" alt="Team 1">
+                                        <span>LA Lakers</span>
+                                    </div>
+                                    <div class="score">
+                                        <span class="badge bg-primary">87</span>
+                                        <span class="badge bg-secondary">:</span>
+                                        <span class="badge bg-primary">92</span>
+                                    </div>
+                                    <div class="team">
+                                        <span>Chicago Bulls</span>
+                                        <img src="https://via.placeholder.com/40" alt="Team 2">
+                                    </div>
+                                </div>
+                                <div class="match-info text-center mt-2">
+                                    <span class="badge bg-danger">LIVE</span>
+                                    <span class="text-muted">Q3 - 4:20</span>
+                                    <a href="live-updates.html" class="btn btn-sm btn-outline-primary ms-2">Watch Details</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <a href="live-updates.html" class="btn btn-primary">View All Live Matches</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Betting Tips Section -->
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Today's Top Betting Tips</h2>
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h3 class="card-title mb-0">AI Predictions</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Real Madrid vs Barcelona
+                                <span class="badge bg-primary rounded-pill">Home Win (70%)</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                PSG vs Bayern Munich
+                                <span class="badge bg-primary rounded-pill">Over 2.5 Goals (85%)</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Golden State Warriors vs Brooklyn Nets
+                                <span class="badge bg-primary rounded-pill">Away Win (65%)</span>
+                            </li>
+                        </ul>
+                        <div class="text-center mt-3">
+                            <a href="betting.html" class="btn btn-success">View All Predictions</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5><i class="fas fa-basketball me-2"></i>SportZone</h5>
+                    <p>Your ultimate destination for sports updates, live scores, and betting tips.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white">Home</a></li>
+                        <li><a href="sports.html" class="text-white">Sports</a></li>
+                        <li><a href="live-updates.html" class="text-white">Live Updates</a></li>
+                        <li><a href="betting.html" class="text-white">Betting</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Connect With Us</h5>
+                    <div class="social-icons">
+                        <a href="#" class="text-white me-2"><i class="fab fa-facebook fa-lg"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-youtube fa-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>&copy; 2025 SportZone. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+</body>
+</html>
