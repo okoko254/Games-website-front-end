@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Betting & Predictions - SportZone</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Betting Page Specific Styles */
+        .hero-betting {
+            background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+            color: white;
+            padding: 50px 0;
+            text-align: center;
+        }
+        
+        .hero-betting h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .hero-betting p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .bet-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 20px;
+        }
+        
+        .bet-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .bet-card .card-header {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .prediction-percentage {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #4CAF50;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+        
+        .prediction-low {
+            background-color: #FFC107;
+        }
+        
+        .prediction-medium {
+            background-color: #2196F3;
+        }
+        
+        .prediction-high {
+            background-color: #4CAF50;
+        }
+        
+        .odds {
+            font-weight: 700;
+            color: #FF5722;
+            font-size: 1.2rem;
+        }
+        
+        .bet-button {
+            background-color: #4CAF50;
+            border-color: #4CAF50;
+            transition: all 0.3s ease;
+        }
+        
+        .bet-button:hover {
+            background-color: #388E3C;
+            border-color: #388E3C;
+            transform: translateY(-2px);
+        }
+        
+        .prediction-factors {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .prediction-factors li {
+            margin-bottom: 8px;
+            padding-left: 24px;
+            position: relative;
+        }
+        
+        .prediction-factors li::before {
+            content: "\f00c";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+        }
+        
+        .trend-up {
+            color: #4CAF50;
+        }
+        
+        .trend-down {
+            color: #F44336;
+        }
+        
+        .hot-bet {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #F44336;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            animation: pulse 1.5s infinite;
+        }
+        
+        .stats-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #757575;
+            font-size: 0.9rem;
+        }
+        
+        .progress-mini {
+            height: 6px;
+            margin-bottom: 15px;
+        }
+        
+        .tab-content {
+            padding: 20px 0;
+        }
+        
+        .subscription-card {
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .subscription-card:hover {
+            transform: translateY(-10px);
+            border-color: #4CAF50;
+        }
+        
+        .subscription-card.featured {
+            border-color: #4CAF50;
+            position: relative;
+        }
+        
+        .subscription-card .card-header {
+            font-weight: 700;
+        }
+        
+        .featured-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        
+        .price span {
+            font-size: 1rem;
+            color: #757575;
+        }
+        
+        .feature-list {
+            list-style-type: none;
+            padding-left: 0;
+            margin-bottom: 20px;
+        }
+        
+        .feature-list li {
+            margin-bottom: 10px;
+            padding-left: 24px;
+            position: relative;
+        }
+        
+        .feature-list li::before {
+            content: "\f00c";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+        }
+        
+        .record-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-right: 10px;
+        }
+        
+        .record-good {
+            background-color: rgba(76, 175, 80, 0.2);
+            color: #388E3C;
+        }
+        
+        .record-average {
+            background-color: rgba(255, 193, 7, 0.2);
+            color: #FFA000;
+        }
+        
+        .stats-graph {
+            height: 120px;
+            margin-top: 20px;
+            position: relative;
+        }
+        
+        .stats-bar {
+            position: absolute;
+            bottom: 0;
+            width: 8%;
+            background-color: #4CAF50;
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+            transition: height 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-basketball fa-bounce me-2"></i>SportZone
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sports.html">Sports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="live-updates.html">Live Updates</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="betting.html">Betting</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="login.html" class="btn btn-outline-light me-2">Login</a>
+                    <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-betting mt-5">
+        <div class="container">
+            <h1>AI-Powered Sports Predictions</h1>
+            <p>Get winning insights with our advanced AI prediction engine that analyzes historical data, player stats, team form, and many other factors to give you the edge.</p>
+            <a href="#predictions" class="btn btn-light btn-lg">View Today's Predictions</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container my-5">
+        <!-- How It Works Section -->
+        <section class="mb-5">
+            <h2 class="text-center mb-4">How Our Prediction Engine Works</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 text-center">
+                        <div class="card-body">
+                            <div class="display-4 text-primary mb-3">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <h4>Data Collection</h4>
+                            <p>We analyze over 10 million data points from historical matches, player statistics, and team performance metrics.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 text-center">
+                        <div class="card-body">
+                            <div class="display-4 text-primary mb-3">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h4>AI Processing</h4>
+                            <p>Our machine learning algorithms identify patterns and trends that human analysts might miss.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 text-center">
+                        <div class="card-body">
+                            <div class="display-4 text-primary mb-3">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h4>Accurate Predictions</h4>
+                            <p>We provide predictions with confidence ratings based on the strength of the statistical evidence.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="bg-light p-4 rounded mb-5">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h3>Our Prediction Track Record</h3>
+                    <p>We're proud of our prediction accuracy across all major sports. Our AI-powered system continuously improves as it learns from new data.</p>
+                    <div class="d-flex mb-3">
+                        <span class="record-badge record-good">76% Football</span>
+                        <span class="record-badge record-good">72% Basketball</span>
+                        <span class="record-badge record-average">68% Tennis</span>
+                    </div>
+                    <p>Last 30 days prediction success rate: <strong>73.5%</strong></p>
+                </div>
+                <div class="col-md-6">
+                    <div class="stats-graph">
+                        <div class="stats-bar" style="left: 0%; height: 65%;"></div>
+                        <div class="stats-bar" style="left: 10%; height: 78%;"></div>
+                        <div class="stats-bar" style="left: 20%; height: 70%;"></div>
+                        <div class="stats-bar" style="left: 30%; height: 67%;"></div>
+                        <div class="stats-bar" style="left: 40%; height: 72%;"></div>
+                        <div class="stats-bar" style="left: 50%; height: 79%;"></div>
+                        <div class="stats-bar" style="left: 60%; height: 68%;"></div>
+                        <div class="stats-bar" style="left: 70%; height: 74%;"></div>
+                        <div class="stats-bar" style="left: 80%; height: 82%;"></div>
+                        <div class="stats-bar" style="left: 90%; height: 76%;"></div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <small>Jan</small>
+                        <small>Feb</small>
+                        <small>Mar</small>
+                        <small>Apr</small>
+                        <small>May</small>
+                        <small>Jun</small>
+                        <small>Jul</small>
+                        <small>Aug</small>
+                        <small>Sep</small>
+                        <small>Oct</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Today's Predictions -->
+        <section id="predictions" class="mb-5">
+            <h2 class="text-center mb-4">Today's Top Predictions</h2>
+            
+            <!-- Filter Tabs -->
+            <ul class="nav nav-pills mb-4 justify-content-center" id="predictionTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="all-tab" data-bs-toggle="pill" data-bs-target="#all" type="button" role="tab" aria-controls="all" aria-selected="true">All Sports</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="football-tab" data-bs-toggle="pill" data-bs-target="#football" type="button" role="tab" aria-controls="football" aria-selected="false">Football</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="basketball-tab" data-bs-toggle="pill" data-bs-target="#basketball" type="button" role="tab" aria-controls="basketball" aria-selected="false">Basketball</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="tennis-tab" data-bs-toggle="pill" data-bs-target="#tennis" type="button" role="tab" aria-controls="tennis" aria-selected="false">Tennis</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="other-tab" data-bs-toggle="pill" data-bs-target="#other" type="button" role="tab" aria-controls="other" aria-selected="false">Other Sports</button>
+                </li>
+            </ul>
+            
+            <!-- Tab Content -->
+            <div class="tab-content" id="predictionTabsContent">
+                <!-- All Sports Tab -->
+                <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
+                    <div class="row">
+                        <!-- Prediction 1 -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="bet-card card position-relative">
+                                <span class="hot-bet">HOT BET!</span>
+                                <div class="card-header">
+                                    Football - Premier League
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <div>
+                                            <h5 class="card-title mb-1">Real Madrid vs Barcelona</h5>
+                                            <small class="text-muted">Today, 20:45</small>
+                                        </div>
+                                        <div class="prediction-percentage prediction-high">
+                                            85%
+                                        </div>
+                                    </div>
+                                    <p class="mb-2"><strong>Prediction:</strong> Real Madrid Win</p>
+                                    <p class="mb-3"><strong>Odds:</strong> <span class="odds">1.75</span></p>
+                                    <ul class="prediction-factors mb-3">
+                                        <li>Strong home form (7 wins in last 8)</li>
+                                        <li>Key Barcelona players injured</li>
+                                        <li>H2H favors Real Madrid</li>
+                                    </ul>
+                                    <div class="d-grid">
+                                        <button class="btn btn-success bet-button">Place Bet</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Prediction 2 -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="bet-card card">
+                                <div class="card-header">
+                                    Basketball - NBA
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <div>
+                                            <h5 class="card-title mb-1">LA Lakers vs Chicago Bulls</h5>
+                                            <small class="text-muted">Today, 19:00</small>
+                                        </div>
+                                        <div class="prediction-percentage prediction-medium">
+                                            75%
+                                        </div>
+                                    </div>
+                                    <p class="mb-2"><strong>Prediction:</strong> Over 210.5 Points</p>
+                                    <p class="mb-3"><strong>Odds:</strong> <span class="odds">1.90</span></p>
+                                    <ul class="prediction-factors mb-3">
+                                        <li>Both teams averaging 110+ points</li>
+                                        <li>Last 5 meetings averaged 218 points</li>
+                                        <li>Key defensive players out</li>
+                                    </ul>
+                                    <div class="d-grid">
+                                        <button class="btn btn-success bet-button">Place Bet</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Prediction 3 -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="bet-card card">
+                                <div class="card-header">
+                                    Tennis - ATP Tour
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <div>
+                                            <h5 class="card-title mb-1">Federer vs Nadal</h5>
+                                            <small class="text-muted">Today, 15:30</small>
+                                        </div>
+                                        <div class="prediction-percentage prediction-medium">
+                                            70%
+                                        </div>
+                                    </div>
+                                    <p class="mb-2"><strong>Prediction:</strong> Nadal Win</p>
+                                    <p class="mb-3"><strong>Odds:</strong> <span class="odds">2.10</span></p>
+                                    <ul class="prediction-factors mb-3">
+                                        <li>Clay court favors Nadal</li>
+                                        <li>Nadal's recent form excellent</li>
+                                        <li>H2H on clay strongly favors Nadal</li>
+                                    </ul>
+                                    <div class="d-grid">
+                                        <button class="btn btn-success bet-button">Place Bet</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Prediction 4 -->
+                        <div class="col-md-6 col-lg-4 mt-4">
+                            <div class="bet-card card">
+                                <div class="card-header">
+                                    Football - Bundesliga
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <div>
+                                            <h5 class="card-title mb-1">Bayern Munich vs Dortmund</h5>
+                                            <small class="text-muted">Today, 18:30</small>
+                                        </div>
+                                        <div class="prediction-percentage prediction-high">
+                                            80%
+                                        </div>
+                                    </div>
+                                    <p class="mb-2"><strong>Prediction:</strong> Both Teams to Score</p>
+                                    <p class="mb-3"><strong>Odds:</strong> <span class="odds">1.65</span></p>
+                                    <ul class="prediction-factors mb-3">
+                                        <li>Both teams scored in last 8 meetings</li>
+                                        <li>Bayern averaging 2.8 goals per game</li>
+                                        <li>Dortmund's attack in strong form</li>
+                                    </ul>
+                                    <div class="d-grid">
+                                        <button class="btn btn-success bet-button">Place Bet</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Prediction 5 -->
+                        <div class="col-md-6 col-lg-4 mt-4">
+                            <div class="bet-card card">
+                                <div class="card-header">
+                                    Baseball - MLB
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <div>
+                                            <h5 class="card-title mb-1">NY Yankees vs Boston Red Sox</h5>
+                                            <small class="text-muted">Today, 23:00</small>
+                                        </div>
+                                        <div class="prediction-percentage prediction-low">
+                                            65%
+                                        </div>
+                                    </div>
+                                    <p class="mb-2"><strong>Prediction:</strong> Yankees Win</p>
+                                    <p class="mb-3"><strong>Odds:</strong> <span class="odds">2.25</span></p>
+                                    <ul class="prediction-factors mb-3">
+                                        <li>Yankees' pitching stats superior</li>
+                                        <li>Yankees won 4 of last 6 meetings</li>
+                                        <li>Home advantage significant</li>
+                                    </ul>
+                                    <div class="d-grid">
+                                        <button class="btn btn-success bet-button">Place Bet</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Prediction 6 -->
+                        <div class="col-md-6 col-lg-4 mt-4">
+                            <div class="bet-card card">
+                                <div class="card-header">
+                                    Football - Serie A
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <div>
+                                            <h5 class="card-title mb-1">Juventus vs AC Milan</h5>
+                                            <small class="text-muted">Today, 21:00</small>
+                                        </div>
+                                        <div class="prediction-percentage prediction-medium">
+                                            72%
+                                        </div>
+                                    </div>
+                                    <p class="mb-2"><strong>Prediction:</strong> Under 2.5 Goals</p>
+                                    <p class="mb-3"><strong>Odds:</strong> <span class="odds">1.85</span></p>
+                                    <ul class="prediction-factors mb-3">
+                                        <li>7 of last 10 meetings under 2.5 goals</li>
+                                        <li>Juventus strong defensive record</li>
+                                        <li>High-pressure match, cautious approach</li>
+                                    </ul>
+                                    <div class="d-grid">
+                                        <button class="btn btn-success bet-button">Place Bet</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <button class="btn btn-outline-success btn-lg">Load More Predictions</button>
+                    </div>
+                </div>
+                
+                <!-- Other tabs would be similarly structured -->
+                <div class="tab-pane fade" id="football" role="tabpanel" aria-labelledby="football-tab">
+                    <div class="row">
+                        <!-- Football predictions would go here -->
+                        <div class="col-12 text-center py-5">
+                            <i class="fas fa-futbol fa-3x mb-3 text-muted"></i>
+                            <h4>Football predictions loading...</h4>
+                            <p>Please log in to view all football predictions</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-pane fade" id="basketball" role="tabpanel" aria-labelledby="basketball-tab">
+                    <div class="row">
+                        <!-- Basketball predictions would go here -->
+                        <div class="col-12 text-center py-5">
+                            <i class="fas fa-basketball-ball fa-3x mb-3 text-muted"></i>
+                            <h4>Basketball predictions loading...</h4>
+                            <p>Please log in to view all basketball predictions</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-pane fade" id="tennis" role="tabpanel" aria-labelledby="tennis-tab">
+                    <!-- Tennis predictions would go here -->
+                </div>
+                
+                <div class="tab-pane fade" id="other" role="tabpanel" aria-labelledby="other-tab">
+                    <!-- Other sports predictions would go here -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- Premium Subscription Section -->
+        <section class="mb-5">
+            <h2 class="text-center mb-4">Premium Prediction Services</h2>
+            <p class="text-center mb-5">Get access to our most accurate predictions and expert analysis with our premium subscription plans.</p>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card subscription-card h-100">
+                        <div class="card-header bg-light text-center">
+                            Basic
+                        </div>
+                        <div class="card-body text-center">
+                            <div class="price">
+                                $9.99 <span>/month</span>
+                            </div>
+                            <ul class="feature-list text-start">
+                                <li>Daily predictions for all major sports</li>
+                                <li>Basic stats and analysis</li>
+                                <li>Email notifications</li>
+                                <li>Community forum access</li>
+                            </ul>
+                            <div class="d-grid">
+                                <a href="#" class="btn btn-outline-success">Get Started</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card subscription-card featured h-100">
+                        <span class="featured-badge">MOST POPULAR</span>
+                        <div class="card-header bg-success text-white text-center">
+                            Pro
+                        </div>
+                        <div class="card-body text-center">
+                            <div class="price">
+                                $19.99 <span>/month</span>
+                            </div>
+                            <ul class="feature-list text-start">
+                                <li>All Basic features included</li>
+                                <li>Premium predictions with 75%+ confidence</li>
+                                <li>Advanced stats and analytics</li>
+                                <li>Expert commentary and insights</li>
+                                <li>Mobile app access</li>
+                            </ul>
+                            <div class="d-grid">
+                                <a href="#" class="btn btn-success">Get Started</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card subscription-card h-100">
+                        <div class="card-header bg-light text-center">
+                            Elite
+                        </div>
+                        <div class="card-body text-center">
+                            <div class="price">
+                                $39.99 <span>/month</span>
+                            </div>
+                            <ul class="feature-list text-start">
+                                <li>All Pro features included</li>
+                                <li>VIP predictions with highest confidence</li>
+                                <li>Personalized betting strategy</li>
+                                <li>One-on-one consultation with experts</li>
+                                <li>Early access to new features</li>
+                                <li>Exclusive member events</li>
+                            </ul>
+                            <div class="d-grid">
+                                <a href="#" class="btn btn-outline-success">Get Started</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Testimonials -->
+        <section class="mb-5">
+            <h2 class="text-center mb-4">What Our Users Say</h2>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="d-flex mb-3">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                            </div>
+                            <p class="card-text">"I've been using SportZone's prediction service for 6 months and have seen a 30% increase in my betting success rate. The AI predictions are incredibly accurate!"</p>
+                            <div class="d-flex align-items-center mt-3">
+                                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                    <span>JM</span>
+                                </div>
+                                <div class="ms-3">
+                                    <h6 class="mb-0">John Miller</h6>
+                                    <small class="text-muted">Premium Member since 2024</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="d-flex mb-3">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                            </div>
+                            <p class="card-text">"The detailed analysis that comes with each prediction helps me understand the reasoning behind it. Not just telling me what to bet on, but why - that's what sets SportZone apart."</p>
+                            <div class="d-flex align-items-center mt-3">
+                                <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                    <span>SD</span>
+                                </div>
+                                <div class="ms-3">
+                                    <h6 class="mb-0">Sarah Davis</h6>
+                                    <small class="text-muted">Elite Member since 2023</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="d-flex mb-3">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="far fa-star text-warning"></i>
+                            </div>
+                            <p class="card-text">"I was skeptical at first, but the Pro plan has paid for itself many times over. The mobile notifications for high-confidence bets have been a game-changer for me."</p>
+                            <div class="d-flex align-items-center mt-3">
+                                <div class="rounded-circle bg-danger text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                    <span>RB</span>
+                                </div>
+                                <div class="ms-3">
+                                    <h6 class="mb-0">Robert Brown</h6>
+                                    <small class="text-muted">Pro Member since 2024</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- FAQ Section -->
+        <section class="mb-5">
+            <h2 class="text-center mb-4">Frequently Asked Questions</h2>
+            
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            How accurate are your predictions?
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Our predictions have an average accuracy of 73% across all sports. We provide confidence ratings with each prediction, so you know which ones have stronger statistical backing. Our AI models are continuously trained on new data to improve accuracy over time.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            How often are predictions updated?
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            We update our predictions daily, with live updates for major events. Premium subscribers receive real-time updates when important factors change (injuries, weather conditions, etc.) that might affect the outcome of a match.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Can I cancel my subscription at any time?
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Yes, you can cancel your subscription at any time. You'll continue to have access to premium features until the end of your current billing period. We don't offer refunds for partial months, but you're welcome to use the service until your subscription period ends.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            What sports do you cover?
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            We cover all major sports including football (soccer), basketball, tennis, baseball, hockey, American football, cricket, and more. Our premium tiers offer more niche sports and more in-depth coverage of leagues worldwide.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFive">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            Do you guarantee winnings?
+                        </button>
+                    </h2>
+                    <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            While our prediction system has a strong track record, we cannot guarantee wins. Sports outcomes always involve some level of uncertainty. We provide probability-based predictions to help inform your betting decisions, but we encourage responsible gambling practices.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Call to Action -->
+        <section class="text-center bg-light p-5 rounded">
+            <h2>Ready to Elevate Your Betting Strategy?</h2>
+            <p class="lead mb-4">Join thousands of successful bettors who trust our AI-powered predictions</p>
+            <a href="signup.html" class="btn btn-success btn-lg">Sign Up Now</a>
+            <p class="mt-3 text-muted">No credit card required for basic access</p>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5><i class="fas fa-basketball me-2"></i>SportZone</h5>
+                    <p>Your ultimate destination for sports updates, live scores, and betting tips.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white">Home</a></li>
+                        <li><a href="sports.html" class="text-white">Sports</a></li>
+                        <li><a href="live-updates.html" class="text-white">Live Updates</a></li>
+                        <li><a href="betting.html" class="text-white">Betting</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Connect With Us</h5>
+                    <div class="social-icons">
+                        <a href="#" class="text-white me-2"><i class="fab fa-facebook fa-lg"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-youtube fa-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>&copy; 2025 SportZone. All rights reserved.</p>
+                <small class="text-muted">Disclaimer: This website is for informational purposes only. Please gamble responsibly.</small>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+</body>
+</html>
