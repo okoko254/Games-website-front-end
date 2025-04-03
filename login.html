@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SportZone</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .login-container {
+            min-height: calc(100vh - 56px);
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #ff5722 0%, #ff9800 100%);
+        }
+        
+        .login-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            max-width: 500px;
+            width: 100%;
+            background: white;
+        }
+        
+        .login-header {
+            background-color: #ff5722;
+            padding: 20px;
+            color: white;
+            text-align: center;
+        }
+        
+        .login-form {
+            padding: 30px;
+        }
+        
+        .form-floating {
+            margin-bottom: 20px;
+        }
+        
+        .btn-login {
+            background-color: #ff5722;
+            border-color: #ff5722;
+            padding: 10px 0;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .btn-login:hover {
+            background-color: #e64a19;
+            border-color: #e64a19;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        }
+        
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .divider span {
+            padding: 0 10px;
+            color: #767676;
+        }
+        
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-5px);
+        }
+        
+        .btn-facebook {
+            background-color: #3b5998;
+        }
+        
+        .btn-google {
+            background-color: #db4437;
+        }
+        
+        .btn-twitter {
+            background-color: #1da1f2;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-basketball fa-bounce me-2"></i>SportZone
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sports.html">Sports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="live-updates.html">Live Updates</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="betting.html">Betting</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="login.html" class="btn btn-outline-light me-2 active">Login</a>
+                    <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Alert Container for messages -->
+    <div class="alert-container position-fixed top-0 start-50 translate-middle-x mt-5" style="z-index: 1000; width: 80%; max-width: 500px;"></div>
+
+    <!-- Login Container -->
+    <div class="login-container">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6">
+                    <div class="login-card">
+                        <div class="login-header">
+                            <h3><i class="fas fa-user-circle me-2"></i>Login to Your Account</h3>
+                        </div>
+                        <div class="login-form">
+                            <form id="loginForm">
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+                                    <label for="email">Email address</label>
+                                </div>
+                                <div class="form-floating mb-4">
+                                    <input type="password" class="form-control" id="password" placeholder="Password" required>
+                                    <label for="password">Password</label>
+                                </div>
+                                <div class="d-flex justify-content-between mb-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="rememberMe">
+                                        <label class="form-check-label" for="rememberMe">
+                                            Remember me
+                                        </label>
+                                    </div>
+                                    <a href="#" class="text-decoration-none">Forgot password?</a>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-login w-100 mb-3">Login</button>
+                            </form>
+                            
+                            <div class="divider">
+                                <span>or continue with</span>
+                            </div>
+                            
+                            <div class="social-login">
+                                <a href="#" class="social-btn btn-facebook">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="social-btn btn-google">
+                                    <i class="fab fa-google"></i>
+                                </a>
+                                <a href="#" class="social-btn btn-twitter">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </div>
+                            
+                            <div class="text-center">
+                                <p>Don't have an account? <a href="signup.html" class="text-decoration-none fw-bold">Sign Up</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+</body>
+</html>
